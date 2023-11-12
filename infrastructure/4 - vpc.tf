@@ -35,15 +35,15 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_security_group" "opensearch_security_group" {
-  name_prefix = "opensearch-sg"
-  description = "Security group for OpenSearch domain"
+resource "aws_security_group" "vectorsearch_security_group" {
+  name_prefix = "vectorsearch-sg"
+  description = "Security group for vectorsearch domain"
   vpc_id      = aws_vpc.doc_search_vpc.id
 
-  # Allow traffic on port 9200 (OpenSearch HTTP) from specific sources
+  # Allow traffic on port 9200 (vectorsearch HTTP) from specific sources
   ingress {
-    from_port   = 9200
-    to_port     = 9200
+    from_port   = 5432
+    to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Adjust this to restrict the source IP ranges
   }
